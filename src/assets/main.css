@@ -1,0 +1,11 @@
+@import url('../vendor/fonts/fonts.css');
+
+.body {
+  margin: 0;
+  max-width: 100%;
+  width: 100%;
+  background: rgb(241,255,207);
+  background: linear-gradient(22deg, rgba(241,255,207,1) 0%, rgba(255,198,219,1) 100%);
+
+  font-family: "Montserrat", Arial, sans-serif;
+}
