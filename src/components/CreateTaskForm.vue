@@ -12,6 +12,7 @@
     methods: {
         createTask() {
             this.task.id = Date.now();
+            this.task.complete = false;
             this.$emit('create', this.task);
             this.task = {
                 title: '',

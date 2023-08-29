@@ -1,23 +1,45 @@
 <script>
+
     export default {
-        props: {
-            task: {
-                type: Object,
-                required: true
-            }
+    props: {
+        task: {
+            type: Object,
+            required: true
         }
     }
+}
 </script>
 
 <template>
-    <li class="list-item">
+    <li class="list-item" v-if="!(task.complete)">
         <div class="list-item__text">
             <h2 class="list-item__title">{{ task.title }}</h2>
             <p class="list-item__desc">{{ task.desc }}</p>
         </div>
         <div class="list-item__buttons">
-            <myButton>Выполнено</myButton>
-            <myButton>Удалить</myButton>
+          <myButton
+            @click="$emit('complete', task)"
+          >
+          Выполнено
+          </myButton>
+          <myButton
+            @click="$emit('remove', task)"
+          >
+          Удалить
+          </myButton>
+        </div>
+    </li>
+    <li class="list-item list-item_complete" v-else>
+        <div class="list-item__text list-item__text_complete">
+            <h2 class="list-item__title">{{ task.title }}</h2>
+            <p class="list-item__desc">{{ task.desc }}</p>
+        </div>
+        <div class="list-item__buttons">
+          <myButton
+            @click="$emit('remove', task)"
+          >
+          Удалить
+          </myButton>
         </div>
     </li>
 </template>
@@ -29,6 +51,16 @@
     justify-content: space-between;
     align-items: center;
   }
+
+  .list-item_complete{
+    border-bottom-color: rgb(123, 255, 154);
+  }
+
+  .list-item__text_complete{
+    text-decoration: line-through;
+    color: #3b8646;
+  }
+
   .list-item__title {
     margin: 0;
     font-size: 22px;

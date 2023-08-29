@@ -10,15 +10,24 @@ export default {
   data() {
     return {
       todoList: [
-        {id: 1, title: "Дело 1", desc: "Описание 1"},
-        {id: 2, title: "Дело 2", desc: "Описание 2"},
-        {id: 3, title: "Дело 3", desc: "Описание 3"}
+        {id: 1, title: "Дело 1", desc: "Описание 1", complete: false},
+        {id: 2, title: "Дело 2", desc: "Описание 2", complete: false},
+        {id: 3, title: "Дело 3", desc: "Описание 3", complete: false}
       ]
     }
   },
   methods: {
     createTask(task) {
       this.todoList.push(task);
+    },
+    removeTask(task) {
+      this.todoList = this.todoList.filter(t => t.id != task.id)
+    },
+    taskComplete(task) {
+      if(this.todoList.filter(t => t.id === task.id)){
+        task.complete = true
+      };
+      console.log(this.todoList)
     }
   }
 }
@@ -28,10 +37,12 @@ export default {
   <header class="header">
     <HeaderComponent/>
   </header>
-  <main>
+  <main class="main">
     <section class="wrapper">
       <TaskList 
         v-bind:TaskList="todoList"
+        @remove="removeTask"
+        @complete="taskComplete"
       />
     </section>
     <section class="create-task">
@@ -43,9 +54,6 @@ export default {
       />
     </section>
   </main>
-  <footer>
-
-  </footer>
 </template>
 
 <style scoped>
@@ -67,22 +75,8 @@ export default {
     background-color: rgba(150, 164, 117, 0.304);
   }
 
-  .wrapper__title {
-    margin: 0;
-    margin-bottom: 30px;
-    text-align: center;
-    font-size: 28px;
-    font-weight: 700;
-    color: #3b6486;
-  }
-
-  .todo__list {
-    display: flex;
-    margin: 0;
-    padding: 0;
-    list-style-type: none;
-    flex-direction: column;
-    row-gap: 15px;
+  .main {
+    padding-bottom: 40px;
   }
 
   .create-task {
