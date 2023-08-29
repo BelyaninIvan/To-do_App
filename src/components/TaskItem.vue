@@ -11,14 +11,23 @@
 
 <template>
     <li class="list-item">
-        <h2 class="list-item__title">{{ task.title }}</h2>
-        <p class="list-item__desc">{{ task.desc }}</p>
+        <div class="list-item__text">
+            <h2 class="list-item__title">{{ task.title }}</h2>
+            <p class="list-item__desc">{{ task.desc }}</p>
+        </div>
+        <div class="list-item__buttons">
+            <myButton>Выполнено</myButton>
+            <myButton>Удалить</myButton>
+        </div>
     </li>
 </template>
 
 <style scoped>
   .list-item {
     border-bottom: 2px solid rgb(241,255,207);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
   }
   .list-item__title {
     margin: 0;
@@ -32,5 +41,10 @@
     font-size: 16px;
     line-height: 1.2;
     font-weight: 400;
+  }
+
+  .list-item__buttons {
+    display: flex;
+    column-gap: 15px;
   }
 </style>
